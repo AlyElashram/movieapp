@@ -16,7 +16,7 @@ Widget movieListTile(double width, double height, Movie movie) {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         width: width / 8,
-        height: height / 8.5,
+        height: height / 10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,7 @@ Widget movieListTile(double width, double height, Movie movie) {
                 color: Color(0xFFD7E1EA),
                 size: 22,
               ),
-            )
+            ),
           ],
         ),
       ),
