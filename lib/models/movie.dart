@@ -1,9 +1,9 @@
 class Movie {
   String? backdrop;
-  List<String>? cast;
+  List? cast;
   String? classification;
   List<String>? director;
-  List<String>? genres;
+  List? genres;
   String? id;
   double? imdb_rating;
   String? length;
@@ -39,10 +39,10 @@ class Movie {
     }
     return Movie(
       json['backdrop'] as String,
-      json['cast'] as List<String>,
+      json['cast'] as List,
       json['classification'] as String,
       director,
-      json['genres'] as List<String>,
+      json['genres'] as List,
       json['id'] as String,
       json['imdb_rating'] as double,
       json['length'] as String,
