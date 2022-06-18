@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movieapp/controllers/movieController.dart';
+import 'package:movieapp/screens/favourites.dart';
 import 'package:movieapp/widgets/movie_list_tile.dart';
 
 import '../models/movie.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   MovieController controller = Get.put(MovieController());
+  int _selectedindex = 0;
   @override
   void initState() {
     controller.getMovies();
@@ -25,7 +27,27 @@ class _HomeScreenState extends State<HomeScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Color(0xFFFAFBFD),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedindex,
+        onTap: ((value) {
+          if (value == 0 && _selectedindex != 0) {
+            _selectedindex = value;
+            Get.off(() => HomeScreen());
+          }
+          if (value == 1 && _selectedindex != 1) {
+            _selectedindex = value;
+            Get.off(() => FavouritesScreen());
+          }
+        }),
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/movies.png'), label: 'Movies'),
+          BottomNavigationBarItem(
+            icon: Image.asset('assets/favourites.png'),
+            label: 'Favourites',
+          )
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -57,7 +79,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
-                        return movieListTile(width, height, movies[index]);
+                        return Card(
+                            shape: Border(
+                                bottom: BorderSide(
+                              width: 0.5,
+                              color: Color(0xFFB1C4DC),
+                            )),
+                            color: Color(0xFFFAFBFD),
+                            shadowColor: null,
+                            surfaceTintColor: null,
+                            borderOnForeground: false,
+                            elevation: 0,
+                            child: movieListTile(width, height, movies[index]));
                       });
                 }),
               ),

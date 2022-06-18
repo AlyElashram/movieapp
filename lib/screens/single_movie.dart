@@ -23,127 +23,137 @@ class _MovieDetailsState extends State<MovieDetails> {
         body: SafeArea(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  child: Row(
+          Expanded(
+            flex: 7,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 30,
+                          height: 30,
+                          child: FloatingActionButton(
+                              splashColor: Colors.transparent,
+                              elevation: 0,
+                              backgroundColor:
+                                  Color(0xFF333333).withOpacity(0.5),
+                              child: Icon(Icons.close,
+                                  color: Colors.white, size: 22),
+                              onPressed: () {
+                                Get.off(() => HomeScreen());
+                              }),
+                        )
+                      ],
+                    ),
+                  ),
+                  Text(
+                    widget.movie.title!,
+                    style: TextStyle(
+                        fontFamily: 'Circular',
+                        fontSize: 26,
+                        color: Color(0xFF2C3F58)),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        child: FloatingActionButton(
-                            splashColor: Colors.transparent,
-                            elevation: 0,
-                            backgroundColor: Color(0xFF333333).withOpacity(0.5),
-                            child: Icon(Icons.close,
-                                color: Colors.white, size: 22),
-                            onPressed: () {
-                              Get.off(() => HomeScreen());
-                            }),
+                      Text(
+                        widget.movie.imdb_rating.toString() + ' Stars',
+                        style: TextStyle(
+                            fontFamily: 'Circular',
+                            fontSize: 14,
+                            color: Color(0xFF2C3F58)),
                       )
                     ],
                   ),
-                ),
-                Text(
-                  widget.movie.title!,
-                  style: TextStyle(
-                      fontFamily: 'Circular',
-                      fontSize: 26,
-                      color: Color(0xFF2C3F58)),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      widget.movie.imdb_rating.toString() + ' Stars',
-                      style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontSize: 14,
-                          color: Color(0xFF2C3F58)),
-                    )
-                  ],
-                ),
-                SizedBox(height: 8),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    widget.movie.backdrop!,
-                    width: width,
-                    height: 250,
-                    fit: BoxFit.cover,
+                  SizedBox(height: 8),
+                  Expanded(
+                    flex: 4,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        widget.movie.backdrop!,
+                        width: width,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Text(
-                      widget.movie.length!,
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Text(
+                        widget.movie.length!,
+                        style: TextStyle(
+                            fontFamily: 'Circular',
+                            fontSize: 14,
+                            color: Color(0xFF2C3F58)),
+                      ),
+                      Spacer(),
+                      Text(
+                        release_date.day.toString() +
+                            '.' +
+                            release_date.month.toString() +
+                            '.' +
+                            release_date.year.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Circular',
+                            fontSize: 14,
+                            color: Color(0xFF2C3F58)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(widget.movie.overview!,
                       style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontSize: 14,
-                          color: Color(0xFF2C3F58)),
-                    ),
-                    Spacer(),
-                    Text(
-                      release_date.day.toString() +
-                          '.' +
-                          release_date.month.toString() +
-                          '.' +
-                          release_date.year.toString(),
-                      style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontSize: 14,
-                          color: Color(0xFF2C3F58)),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(widget.movie.overview!,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 17,
-                      color: Color(0xFF2C3F58),
-                    )),
-              ],
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Circular',
+                        fontSize: 17,
+                        color: Color(0xFF2C3F58),
+                      )),
+                ],
+              ),
             ),
           ),
-          Spacer(),
           Divider(thickness: 2, color: Color(0xFF25245F).withOpacity(0.2)),
-          Container(
-            width: width,
-            height: 115,
-            child: Center(
-              child: Container(
-                  width: width - 40,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        side: BorderSide(width: 0.7, color: Color(0xFF25245F))),
-                    child: Text(
-                      "Add to Favourites",
-                      style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontSize: 16,
-                          color: Color(0xFF2C3F58)),
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: width,
+              child: Center(
+                child: Container(
+                    width: width - 40,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
                     ),
-                    onPressed: () {
-                      //TODO:Add To Favourites
-                    },
-                  )),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          primary: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          side:
+                              BorderSide(width: 0.7, color: Color(0xFF25245F))),
+                      child: Text(
+                        "Add to Favourites",
+                        style: TextStyle(
+                            fontFamily: 'Circular',
+                            fontSize: 16,
+                            color: Color(0xFF2C3F58)),
+                      ),
+                      onPressed: () {
+                        //TODO:Add To Favourites
+                      },
+                    )),
+              ),
             ),
           )
         ],
