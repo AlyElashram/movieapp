@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../models/movie.dart';
+import '../screens/single_movie.dart';
 
 Widget movieListTile(double width, double height, Movie movie) {
   String genres = '';
   movie.genres?.forEach((genre) => {genres += genre + ' ' + '|' + ' '});
   genres = genres.substring(0, genres.length - 2);
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Get.to(() => MovieDetails(movie: movie));
+    },
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
