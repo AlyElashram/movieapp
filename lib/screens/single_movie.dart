@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
+import '../controllers/movieController.dart';
 import '../models/movie.dart';
-import 'homescreen.dart';
 
 class MovieDetails extends StatefulWidget {
   final Movie movie;
@@ -13,10 +13,17 @@ class MovieDetails extends StatefulWidget {
 }
 
 class _MovieDetailsState extends State<MovieDetails> {
+  MovieController controller = Get.put(MovieController());
+  bool isFav = false;
+  @override
+  void initState() {
+    isFav = controller.isFavourite(widget.movie.id!);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime release_date = DateTime.parse(widget.movie.released_on!);
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -46,7 +53,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                               child: Icon(Icons.close,
                                   color: Colors.white, size: 22),
                               onPressed: () {
-                                Get.off(() => HomeScreen());
+                                Get.back();
                               }),
                         )
                       ],
@@ -129,33 +136,57 @@ class _MovieDetailsState extends State<MovieDetails> {
             child: Container(
               width: width,
               child: Center(
-                child: Container(
-                    width: width - 40,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          primary: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          side:
-                              BorderSide(width: 0.7, color: Color(0xFF25245F))),
-                      child: Text(
-                        "Add to Favourites",
-                        style: TextStyle(
-                            fontFamily: 'Circular',
-                            fontSize: 16,
-                            color: Color(0xFF2C3F58)),
+                  child: Container(
+                      width: width - 40,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
                       ),
-                      onPressed: () {
-                        //TODO:Add To Favourites
-                      },
-                    )),
-              ),
+                      child: !isFav
+                          ? OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  primary: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  side: BorderSide(
+                                      width: 0.7, color: Color(0xFF25245F))),
+                              child: Text(
+                                "Add to favourites",
+                                style: TextStyle(
+                                    fontFamily: 'Circular',
+                                    fontSize: 16,
+                                    color: Color(0xFF2C3F58)),
+                              ),
+                              onPressed: () {
+                                controller.addFavourite(widget.movie.id!);
+                                setState(() {
+                                  isFav = !isFav;
+                                });
+                              },
+                            )
+                          : OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  primary: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  side: BorderSide(
+                                      width: 0.7, color: Color(0xFFFF4C6D))),
+                              child: Text(
+                                "Remove from favourites",
+                                style: TextStyle(
+                                    fontFamily: 'Circular',
+                                    fontSize: 16,
+                                    color: Color(0xFFFF4C6D)),
+                              ),
+                              onPressed: () {
+                                controller.removeFavourite(widget.movie.id!);
+                                setState(() {
+                                  isFav = !isFav;
+                                });
+                              },
+                            ))),
             ),
-          )
+          ),
         ],
       ),
     ));
