@@ -32,7 +32,7 @@ Widget movieListTile(double width, double height, Movie movie) {
             flex: 3,
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,12 +45,14 @@ Widget movieListTile(double width, double height, Movie movie) {
                       color: Color(0xFF778699),
                     ),
                   ),
-                  Text(
-                    movie.title!,
-                    style: TextStyle(
-                        fontFamily: 'Circular',
-                        color: Color(0xFF2C3F58),
-                        fontSize: 17),
+                  Expanded(
+                    child: Text(
+                      movie.title!,
+                      style: TextStyle(
+                          fontFamily: 'Circular',
+                          color: Color(0xFF2C3F58),
+                          fontSize: 17),
+                    ),
                   )
                 ],
               ),

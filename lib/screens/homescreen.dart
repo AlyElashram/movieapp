@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: hide
                   ? Container(
                       decoration: BoxDecoration(
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
             ),
             Expanded(
-              flex: 5,
+              flex: 9,
               child: Container(
                 width: width - 20,
                 height: height - 20,
