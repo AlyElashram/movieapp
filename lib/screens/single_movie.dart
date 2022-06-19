@@ -17,15 +17,15 @@ class _MovieDetailsState extends State<MovieDetails> {
   bool isFav = false;
   @override
   void initState() {
-    isFav = controller.isFavourite(widget.movie.id!);
+    isFav = controller.isFavourite(widget.movie.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    DateTime release_date = DateTime.parse(widget.movie.released_on!);
+    DateTime release_date = DateTime.parse(widget.movie.released_on);
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
         body: SafeArea(
       child: Column(
@@ -60,7 +60,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     ),
                   ),
                   Text(
-                    widget.movie.title!,
+                    widget.movie.title,
                     style: TextStyle(
                         fontFamily: 'Circular',
                         fontSize: 26,
@@ -85,7 +85,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
-                        widget.movie.backdrop!,
+                        widget.movie.backdrop,
                         width: width,
                         height: 250,
                         fit: BoxFit.cover,
@@ -96,7 +96,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                   Row(
                     children: [
                       Text(
-                        widget.movie.length!,
+                        widget.movie.length,
                         style: TextStyle(
                             fontFamily: 'Circular',
                             fontSize: 14,
@@ -119,7 +119,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                   SizedBox(
                     height: 16,
                   ),
-                  Text(widget.movie.overview!,
+                  Text(widget.movie.overview,
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Circular',
@@ -158,7 +158,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                     color: Color(0xFF2C3F58)),
                               ),
                               onPressed: () {
-                                controller.addFavourite(widget.movie.id!);
+                                controller.addFavourite(widget.movie.id);
                                 setState(() {
                                   isFav = !isFav;
                                 });
@@ -179,7 +179,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                     color: Color(0xFFFF4C6D)),
                               ),
                               onPressed: () {
-                                controller.removeFavourite(widget.movie.id!);
+                                controller.removeFavourite(widget.movie.id);
                                 setState(() {
                                   isFav = !isFav;
                                 });

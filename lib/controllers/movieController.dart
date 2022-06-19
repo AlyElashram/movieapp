@@ -26,7 +26,7 @@ class MovieController extends GetxController {
       responseMovies.forEach((element) {
         Movie item = Movie.fromJson(element);
         list.add(item);
-        item.genres!.forEach((element) {
+        item.genres.forEach((element) {
           genre.add(element.toString());
         });
       });
@@ -41,7 +41,7 @@ class MovieController extends GetxController {
   void getFilteredMovies(String genre) {
     List<Movie> filter = [];
     for (Movie movie in movies) {
-      if (movie.genres!.contains(genre)) {
+      if (movie.genres.contains(genre)) {
         filter.add(movie);
       }
     }

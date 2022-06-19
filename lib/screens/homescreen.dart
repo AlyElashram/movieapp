@@ -6,8 +6,6 @@ import 'package:movieapp/screens/favourites.dart';
 import 'package:movieapp/screens/single_movie.dart';
 import 'package:movieapp/widgets/movie_list_tile.dart';
 
-import '../models/movie.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

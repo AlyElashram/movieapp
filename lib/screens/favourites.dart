@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:movieapp/screens/single_movie.dart';
-
-import '../models/movie.dart';
 import '../widgets/movie_list_tile.dart';
 import 'homescreen.dart';
 import '../controllers/movieController.dart';

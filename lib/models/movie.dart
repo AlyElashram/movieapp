@@ -1,17 +1,17 @@
 class Movie {
-  String? backdrop;
-  List? cast;
-  String? classification;
-  List<String>? director;
-  List? genres;
-  String? id;
-  double? imdb_rating;
-  String? length;
-  String? overview;
-  String? poster;
-  String? released_on;
-  String? slug;
-  String? title;
+  String backdrop;
+  List cast;
+  String classification;
+  List<String> director;
+  List genres;
+  String id;
+  double imdb_rating;
+  String length;
+  String overview;
+  String poster;
+  String released_on;
+  String slug;
+  String title;
 
   Movie(
       this.backdrop,
