@@ -7,13 +7,16 @@ import 'package:http/http.dart' as http;
 class MovieController extends GetxController {
   List<Movie> movies = [];
   List<Movie> favourites = [];
+  List<Movie> filtered = [];
+  Set<String> genres = Set();
   MovieController() {
-    getMovies();
+    getMoviesAndGenres();
     getFavourites();
   }
 
-  getMovies() async {
+  getMoviesAndGenres() async {
     List<Movie> list = [];
+    Set<String> genre = Set();
     const String url = "https://wookie.codesubmit.io/movies";
     http.Response res = await http
         .get(Uri.parse(url), headers: {"Authorization": "Bearer Wookie2019"});
@@ -21,13 +24,29 @@ class MovieController extends GetxController {
       final Map<String, dynamic> response = jsonDecode(res.body);
       List responseMovies = response['movies'];
       responseMovies.forEach((element) {
-        list.add(Movie.fromJson(element));
+        Movie item = Movie.fromJson(element);
+        list.add(item);
+        item.genres!.forEach((element) {
+          genre.add(element.toString());
+        });
       });
       movies = list;
+      genres = genre;
       update();
     } else {
       throw ('Could not fetch movies error code:${res.statusCode}');
     }
+  }
+
+  void getFilteredMovies(String genre) {
+    List<Movie> filter = [];
+    for (Movie movie in movies) {
+      if (movie.genres!.contains(genre)) {
+        filter.add(movie);
+      }
+    }
+    filtered = filter;
+    update();
   }
 
   void getFavourites() {
