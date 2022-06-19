@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movieapp/controllers/movieController.dart';
 import 'package:movieapp/screens/favourites.dart';
+import 'package:movieapp/screens/single_movie.dart';
 import 'package:movieapp/widgets/movie_list_tile.dart';
 
 import '../models/movie.dart';
@@ -18,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedindex = 0;
   @override
   void initState() {
-    controller.getMovies();
     super.initState();
   }
 
@@ -79,18 +79,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                            shape: Border(
-                                bottom: BorderSide(
-                              width: 0.5,
-                              color: Color(0xFFB1C4DC),
-                            )),
-                            color: Color(0xFFFAFBFD),
-                            shadowColor: null,
-                            surfaceTintColor: null,
-                            borderOnForeground: false,
-                            elevation: 0,
-                            child: movieListTile(width, height, movies[index]));
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(() => MovieDetails(movie: _.movies[index]));
+                          },
+                          child: Card(
+                              shape: Border(
+                                  bottom: BorderSide(
+                                width: 0.5,
+                                color: Color(0xFFB1C4DC),
+                              )),
+                              color: Color(0xFFFAFBFD),
+                              shadowColor: null,
+                              surfaceTintColor: null,
+                              borderOnForeground: false,
+                              elevation: 0,
+                              child:
+                                  movieListTile(width, height, movies[index])),
+                        );
                       });
                 }),
               ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movieapp/screens/favourites.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:movieapp/screens/homescreen.dart';
-import 'package:movieapp/screens/single_movie.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  int _selectedindex = 0;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
